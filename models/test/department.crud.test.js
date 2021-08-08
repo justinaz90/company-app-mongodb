@@ -9,7 +9,7 @@ describe('Department', () => {
     try {
       const fakeDB = new MongoMemoryServer();
       const uri = await fakeDB.getUri();
-      mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     } catch(err) {
       console.log(err);
     }
@@ -33,7 +33,7 @@ describe('Department', () => {
     it('should return a proper document by "name" with "findOne" method', async () => {
       const department = await Department.findOne({ name: 'Department #1' });
       const expectedName = 'Department #1';
-      expect(department.name).to.be.equal('Department #1');
+      expect(department.name).to.be.equal(expectedName);
     });    
     
     after(async () => {
@@ -99,7 +99,7 @@ describe('Department', () => {
 
     it('should properly remove one document with "deleteOne" method', async () => {
       await Department.deleteOne({ name: 'Department #1' });
-      const removeDepartment = await Department.findOne({ name: '=Department #1=' });
+      const removeDepartment = await Department.findOne({ name: 'Department #1' });
       expect(removeDepartment).to.be.null;
     });
 
