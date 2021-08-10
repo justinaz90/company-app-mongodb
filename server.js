@@ -20,7 +20,10 @@ app.use((req, res) => {
   res.status(404).send({ message: 'Not found...' });
 });
 
-const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb://localhost:27017/companyDB' : 'mongodb://localhost:27017/companyDB';
+const dbURI = process.env.NODE_ENV === 'production' 
+// ? 'mongodb://localhost:27017/fakeDB' 
+? 'mongodb+srv://justyna-szewczyk:testapp@cluster0.30cel.mongodb.net/testing?retryWrites=true&w=majority'
+: 'mongodb://localhost:27017/companyDB';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
