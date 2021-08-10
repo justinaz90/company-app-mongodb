@@ -9,7 +9,7 @@ describe('Department', () => {
     try {
       const fakeDB = new MongoMemoryServer();
       const uri = await fakeDB.getUri();
-      await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.createConnection(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     } catch(err) {
       console.log(err);
     }
